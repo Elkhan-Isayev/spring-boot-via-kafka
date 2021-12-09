@@ -1,0 +1,25 @@
+spring:
+  cloud:
+    loadbalancer:
+      enabled: true
+
+ribbon:
+  eureka:
+    enabled: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${EUREKA_HOST}:${EUREKA_PORT}/eureka/
+    instances:
+      preferIpAddress: true
+    register-with-eureka: true
+
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 60000
+        readTimeout: 60000
+        loggerLevel: full
