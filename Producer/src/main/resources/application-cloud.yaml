@@ -1,0 +1,25 @@
+spring:
+  cloud:
+    loadbalancer:
+      enabled: true
+
+#ribbon:
+#  eureka:
+#    enabled: true
+
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone:
+#    instances:
+#      preferIpAddress: true
+#    register-with-eureka: true
+
+
+#feign:
+#  client:
+#    config:
+#      default:
+#        connectTimeout: 60000
+#        readTimeout: 60000
+#        loggerLevel: full
