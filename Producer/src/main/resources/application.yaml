@@ -1,0 +1,16 @@
+server:
+  port: 8082
+
+
+spring:
+  application:
+    name: consumer
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active:
+      - db
+      - logger
+      - cloud
+      - clients
+      - kafka

@@ -1,0 +1,17 @@
+spring:
+  kafka:
+    template:
+      send-data-topic: data-sender
+
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: encom-team-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+      properties:
+        spring:
+          json:
+            add:
+              type:
+                headers: false
