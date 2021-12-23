@@ -22,7 +22,7 @@ public class DataProducerService {
     public void start() {
         DataDto data = new DataDto();
         data.setTitle("testTitle");
-        data.setDescription("testDescription");
+        data.setDescription("Hello World!");
         sendData(data);
     }
 
