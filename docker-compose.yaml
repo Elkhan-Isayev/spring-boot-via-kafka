@@ -9,9 +9,6 @@ services:
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
-    networks:
-      - kafka-network
-
 
   kafka:
     image: confluentinc/cp-server:5.5.0
@@ -31,9 +28,6 @@ services:
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_CONFLUENT_LICENSE_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
-    networks:
-      - kafka-network
-
 
   schema-registry:
     image: confluentinc/cp-schema-registry:5.5.0
@@ -47,11 +41,6 @@ services:
     environment:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
       SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: 'zookeeper:2181'
-    networks:
-      - kafka-network
-
-networks:
-  kafka-network:
     
   
 # create-topics:
@@ -66,5 +55,3 @@ networks:
 #   environment:
 #     KAFKA_BROKER_ID: ignored
 #     KAFKA_ZOOKEEPER_CONNECT: ignored
-#   networks:
-#     - kafka-network
