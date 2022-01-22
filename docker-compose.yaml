@@ -9,6 +9,8 @@ services:
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - kafka-network
 
   kafka:
     image: confluentinc/cp-server:5.5.0
@@ -28,6 +30,8 @@ services:
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_CONFLUENT_LICENSE_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+    networks:
+      - kafka-network
 
   schema-registry:
     image: confluentinc/cp-schema-registry:5.5.0
@@ -41,17 +45,38 @@ services:
     environment:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
       SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: 'zookeeper:2181'
-    
-  
-# create-topics:
-#   image: confluentinc/cp-kafka:5.5.0
-#   hostname: create-topics
-#   container_name: create-topics
-#   depends_on:
-#     - kafka
-#   command: "
-#     bash -c 'cub kafka-ready -b kafka:9092 1 120 && \
-#     kafka-topics --create --if-not-exists --zookeeper zookeeper:2181 --partitions 2 --replication-factor 1 --topic balance'"
-#   environment:
-#     KAFKA_BROKER_ID: ignored
-#     KAFKA_ZOOKEEPER_CONNECT: ignored
+    networks:
+      - kafka-network
+
+  consumer:
+    image: rinsler/docker-consumer
+    container_name: consumer
+    depends_on:
+      - zookeeper
+      - kafka
+      - schema-registry
+    ports: 
+      - 8085:8080
+    restart: 
+      unless-stopped
+    networks:
+      - kafka-network
+
+  producer:
+    image: rinsler/docker-producer
+    container_name: producer
+    depends_on:
+      - zookeeper
+      - kafka
+      - schema-registry
+      - consumer
+    ports: 
+      - 8086:8080
+    restart: 
+      unless-stopped
+    networks:
+      - kafka-network
+
+networks:
+  kafka-network:
+    driver: bridge

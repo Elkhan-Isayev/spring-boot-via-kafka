@@ -13,6 +13,6 @@ public class DataConsumerService {
     @KafkaListener(topics = "${spring.kafka.template.send-data-topic}", groupId = "encom-team-group")
     public void consumeNotification(DataDto dataDto) {
         log.info("incoming data DTO: {}", dataDto.toString());
-//        System.out.println(dataDto);
+        System.out.println(dataDto);
     }
 }
