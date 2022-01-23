@@ -1,5 +1,5 @@
 # Welcome
-This example will help you set up and emulate a system consisting of Producer, Consumer and apache kafka
+This example will help you set up and emulate a system consisting of Producer, Consumer and [Apache Kafka](https://kafka.apache.org/)
 ## Setup
 1. Make sure you have [Docker](https://www.docker.com/products/docker-desktop) installed on your computer
 2. Download project to your computer
