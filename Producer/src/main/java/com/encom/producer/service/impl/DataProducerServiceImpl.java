@@ -16,12 +16,8 @@ public class DataProducerServiceImpl implements DataProducerService {
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
     @Override
-    public ResponseData<DataDto> sendData(DataDto data) {
+    public DataDto sendData(DataDto data) {
         kafkaTemplate.send(dataTopic, data);
-        return ResponseData.<DataDto>builder()
-            .code(200)
-            .message("Dto sended, check consumer 8)")
-            .body(data)
-            .build();
+        return data;
     }
 }
